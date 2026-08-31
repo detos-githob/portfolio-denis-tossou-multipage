@@ -1,9 +1,9 @@
+
 # Portfolio de Denis Tossou — site multipage
 
 ## Structure du projet
 
-```
-index.html        → Accueil (hero carrousel, stats, services, pourquoi me choisir)
+```ices, pourquoi me choisir)
 a-propos.html      → À propos (qui suis-je, compétences, CV, valeurs, vision)
 projets.html       → Projets (grille filtrable, témoignages, partenaires)
 services.html      → Services (provisoire — contenu à retravailler ensemble)
@@ -56,3 +56,4 @@ Le site est 100% statique (HTML/CSS/JS, aucun serveur requis). Héberge le
 dossier complet sur Netlify, Cloudflare Pages ou GitHub Pages — glisse-dépose
 le dossier entier (pas juste `index.html`) pour que le CSS, le JS et les
 images suivent.
+
