@@ -1,0 +1,111 @@
+{
+  "items": [
+    {
+      "title": "Ets MEMEB — Site vitrine",
+      "category": "developpement",
+      "status": "termine",
+      "image": "assets/img/proj-memeb-vitrine.webp",
+      "imageStyle": "cover",
+      "badge": "MEMEB",
+      "summary": "Conception et développement du site vitrine de l'entreprise, réalisés dans le cadre de mon stage chez Nerdx Academy.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "Sites web — Edushop, Be The Best, Wopas, Best Bénin",
+      "category": "developpement",
+      "status": "termine",
+      "image": "assets/img/proj-sites-web.webp",
+      "imageStyle": "cover",
+      "badge": "Site web",
+      "summary": "Participation au développement de plusieurs sites web pour ces structures, dans le cadre de mon stage chez Nerdx Academy.",
+      "link": "https://edushop.africa",
+      "features": []
+    },
+    {
+      "title": "Ets MEMEB — Identité visuelle",
+      "category": "design",
+      "status": "termine",
+      "image": "assets/img/logo-memeb.webp",
+      "imageStyle": "contain",
+      "badge": "MEMEB",
+      "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "JT Service — Identité visuelle",
+      "category": "design",
+      "status": "termine",
+      "image": "assets/img/logo-jtservice.webp",
+      "imageStyle": "contain",
+      "badge": "JT Service",
+      "summary": "Création du logo, de la charte graphique, d'affiches et de visuels de communication.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "Farhane and Company Sarl — Identité visuelle",
+      "category": "design",
+      "status": "termine",
+      "image": "assets/img/logo-farhane.webp",
+      "imageStyle": "contain",
+      "badge": "Farhane",
+      "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "Pro Energy and BTP Sarl — Identité visuelle",
+      "category": "design",
+      "status": "termine",
+      "image": "assets/img/logo-proenergy.webp",
+      "imageStyle": "contain",
+      "badge": "Pro Energy",
+      "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "Don de Dieu & Lynares Agro — Logos & chartes graphiques",
+      "category": "design",
+      "status": "termine",
+      "image": "assets/img/logo-lynares.webp",
+      "imageStyle": "contain",
+      "badge": "Lynares Agro",
+      "summary": "Création de logos, de chartes graphiques et d'affiches pour ces deux entreprises.",
+      "link": "",
+      "features": []
+    },
+    {
+      "title": "Edushop — Community management",
+      "category": "marketing",
+      "status": "termine",
+      "image": "assets/img/proj-edushop-community.webp",
+      "imageStyle": "cover",
+      "badge": "Edushop",
+      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
+      "link": "",
+      "features": [
+        "Stratégie de contenu et publication régulière",
+        "Gestion de la page Facebook",
+        "Résultat chiffré à ajouter dès disponibilité"
+      ]
+    },
+    {
+      "title": "JT Service — Community management",
+      "category": "marketing",
+      "status": "termine",
+      "image": "assets/img/proj-jtservice-community.webp",
+      "imageStyle": "cover",
+      "badge": "JT Service",
+      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
+      "link": "",
+      "features": [
+        "Stratégie de contenu et publication régulière",
+        "Gestion de la page Facebook",
+        "Résultat chiffré à ajouter dès disponibilité"
+      ]
+    }
+  ]
+}

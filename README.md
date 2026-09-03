@@ -1,9 +1,9 @@
-
 # Portfolio de Denis Tossou — site multipage
 
 ## Structure du projet
 
-```ices, pourquoi me choisir)
+```
+index.html        → Accueil (hero carrousel, stats, services, pourquoi me choisir)
 a-propos.html      → À propos (qui suis-je, compétences, CV, valeurs, vision)
 projets.html       → Projets (grille filtrable, témoignages, partenaires)
 services.html      → Services (provisoire — contenu à retravailler ensemble)
@@ -57,3 +57,17 @@ dossier complet sur Netlify, Cloudflare Pages ou GitHub Pages — glisse-dépose
 le dossier entier (pas juste `index.html`) pour que le CSS, le JS et les
 images suivent.
 
+## Panneau d'administration (ajouter des projets sans coder)
+
+Un panneau `/admin` (Decap CMS) est en place pour gérer la page Projets
+directement depuis un navigateur, sans toucher au code. Il n'est **pas encore
+actif** — il demande une configuration ponctuelle (compte GitHub, Cloudflare
+Worker). Suis **`GUIDE-ADMIN.md`** pour l'activer, étape par étape (~20-30 min,
+une seule fois).
+
+Fichiers concernés :
+- `admin/index.html` et `admin/config.yml` — l'interface d'administration
+- `data/projects.json` — les données des projets, éditées par le CMS et lues
+  par `js/main.js` pour construire les fiches sur `projets.html`
+- `cms-oauth-worker/worker.js` — le code à déployer sur Cloudflare Workers
+  pour gérer la connexion GitHub (pas un fichier du site, à déployer à part)

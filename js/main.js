@@ -18,19 +18,24 @@ if (header) {
 
 /* ========================= SCROLL REVEAL ========================= */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealEls = document.querySelectorAll('.reveal');
-if (revealEls.length) {
+let sharedRevealIO = null;
+function applyReveal(scope){
+  const els = (scope || document).querySelectorAll('.reveal');
+  if (!els.length) return;
   if ('IntersectionObserver' in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, {threshold:0.15});
-    revealEls.forEach(el=>io.observe(el));
+    if (!sharedRevealIO) {
+      sharedRevealIO = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if (e.isIntersecting) { e.target.classList.add('in'); sharedRevealIO.unobserve(e.target); }
+        });
+      }, {threshold:0.15});
+    }
+    els.forEach(el=>sharedRevealIO.observe(el));
   } else {
-    revealEls.forEach(el=>el.classList.add('in'));
+    els.forEach(el=>el.classList.add('in'));
   }
 }
+applyReveal(document);
 
 /* ========================= TYPEWRITER — rôle dans le hero ========================= */
 const roles = ["Développeur web","Designer UI/UX","Gestionnaire de campagnes digitales","Référent digital"];
@@ -184,16 +189,73 @@ if (skillPills.length) {
   skillPills.forEach(p=>pillIO.observe(p));
 }
 
-/* ========================= PROJETS — filtres ========================= */
+/* ========================= PROJETS — chargement depuis data/projects.json ========================= */
+const portfolioGrid = document.getElementById('portfolioGrid');
 const filterBtns = document.querySelectorAll('#filterTabs .btn-plain');
-const portfolioCards = document.querySelectorAll('#portfolioGrid .p-card');
+
+function escapeHTML(str){
+  return String(str == null ? '' : str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+const categoryLabels = { developpement: 'Développement', design: 'Design', marketing: 'Marketing digital' };
+
+function projectCardHTML(p, i){
+  const thumbClass = p.imageStyle === 'contain' ? 'thumb logo-thumb' : 'thumb';
+  const statusClass = p.status === 'encours' ? 'progress' : 'done';
+  const statusLabel = p.status === 'encours' ? 'En cours' : 'Terminé';
+  const catLabel = categoryLabels[p.category] || p.category;
+  const delayClass = ['','reveal-delay-1','reveal-delay-2'][i % 3];
+
+  const featuresHTML = (p.features && p.features.length)
+    ? `<ul class="did-list">${p.features.map(f => `<li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>${escapeHTML(f)}</li>`).join('')}</ul>`
+    : '';
+
+  const ctaHTML = p.link
+    ? `<div class="card-cta"><a href="${escapeHTML(p.link)}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm"><span class="btn-label">Voir le projet</span><span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>`
+    : '';
+
+  return `
+    <div class="p-card reveal ${delayClass}" data-category="${escapeHTML(p.category)}">
+      <div class="${thumbClass}">
+        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}">
+        <span class="status-badge ${statusClass}">${statusLabel}</span>
+        ${p.badge ? `<span class="thumb-badge">${escapeHTML(p.badge)}</span>` : ''}
+      </div>
+      <div class="body">
+        <div class="tag-row"><span class="tag tag-orange">${escapeHTML(catLabel)}</span></div>
+        <h4>${escapeHTML(p.title)}</h4>
+        <p class="summary">${escapeHTML(p.summary)}</p>
+        ${featuresHTML}
+        ${ctaHTML}
+      </div>
+    </div>`;
+}
+
+async function loadProjects(){
+  if (!portfolioGrid) return;
+  const source = portfolioGrid.dataset.source;
+  try {
+    const res = await fetch(source);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const items = data.items || [];
+    portfolioGrid.innerHTML = items.map((p,i)=>projectCardHTML(p,i)).join('');
+    applyReveal(portfolioGrid);
+  } catch (err) {
+    portfolioGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les projets pour le moment.</p>';
+    console.error('Erreur de chargement des projets :', err);
+  }
+}
+loadProjects();
+
 if (filterBtns.length) {
   filterBtns.forEach(btn=>{
     btn.addEventListener('click', ()=>{
       filterBtns.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       const filter = btn.dataset.filter;
-      portfolioCards.forEach(card=>{
+      document.querySelectorAll('#portfolioGrid .p-card').forEach(card=>{
         const cats = (card.dataset.category || '').split(' ').filter(Boolean);
         const show = filter === 'tous' || cats.includes(filter);
         card.classList.toggle('is-hidden', !show);
@@ -240,6 +302,19 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 /* ========================= FORMULAIRE DE CONTACT — Formspree ========================= */
 const form = document.getElementById('contactForm');
 if (form) {
+  /* Pré-remplissage depuis l'URL (ex. contact.html?service=developpement&budget=starter) */
+  const params = new URLSearchParams(window.location.search);
+  const serviceField = document.getElementById('f-service');
+  const budgetField = document.getElementById('f-budget');
+  if (serviceField && params.has('service')) {
+    const val = params.get('service');
+    if ([...serviceField.options].some(o => o.value === val)) serviceField.value = val;
+  }
+  if (budgetField && params.has('budget')) {
+    const val = params.get('budget');
+    if ([...budgetField.options].some(o => o.value === val)) budgetField.value = val;
+  }
+
   const formNote = document.getElementById('formNote');
   const submitLabel = document.getElementById('submitLabel');
   form.addEventListener('submit', async (e) => {

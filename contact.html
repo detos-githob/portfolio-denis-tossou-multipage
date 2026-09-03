@@ -44,14 +44,51 @@
       <div class="contact-heading"><h2>Parlons de votre projet</h2></div>
       <div class="contact-body">
         <div class="contact-form">
-          <p class="contact-lead">Que vous ayez une idée précise ou juste une envie de faire mieux en ligne, écrivez-moi. Je réponds sous 24h.</p>
+          <p class="contact-lead">Décrivez votre projet en quelques champs, je reviens vers vous sous 24h avec une proposition claire.</p>
           <form id="contactForm" action="https://formspree.io/f/moearrjp" method="POST">
-            <div class="field"><input type="text" name="nom" placeholder="Nom"></div>
-            <div class="field"><input type="email" name="email" placeholder="Email" required></div>
-            <div class="field"><textarea name="message" placeholder="Votre projet en quelques mots" required></textarea></div>
-            <input type="hidden" name="_subject" value="Nouveau message — portfolio denistossou.com">
+            <div class="field-row">
+              <div class="field"><label for="f-nom">Nom complet *</label><input id="f-nom" type="text" name="nom" placeholder="Votre nom" required></div>
+              <div class="field"><label for="f-email">Email *</label><input id="f-email" type="email" name="email" placeholder="votre@email.com" required></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="f-entreprise">Entreprise / Projet</label><input id="f-entreprise" type="text" name="entreprise" placeholder="Nom de votre entreprise"></div>
+              <div class="field">
+                <label for="f-service">Service souhaité *</label>
+                <select id="f-service" name="service" required>
+                  <option value="" disabled selected>Sélectionner un service</option>
+                  <option value="developpement">Développement web</option>
+                  <option value="design">Design graphique / Identité visuelle</option>
+                  <option value="marketing">Marketing digital / Réseaux sociaux</option>
+                  <option value="autre">Autre / Plusieurs services</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-budget">Budget approximatif (FCFA)</label>
+                <select id="f-budget" name="budget">
+                  <option value="" disabled selected>Sélectionner un budget</option>
+                  <option value="starter">Moins de 150 000 FCFA</option>
+                  <option value="business">150 000 — 350 000 FCFA</option>
+                  <option value="entreprise">Plus de 350 000 FCFA</option>
+                  <option value="inconnu">Je ne sais pas encore</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-delai">Délai souhaité</label>
+                <select id="f-delai" name="delai">
+                  <option value="" disabled selected>Sélectionner un délai</option>
+                  <option value="urgent">Le plus vite possible</option>
+                  <option value="1mois">Dans le mois</option>
+                  <option value="3mois">1 à 3 mois</option>
+                  <option value="flexible">Pas de contrainte de délai</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label for="f-message">Décrivez votre projet *</label><textarea id="f-message" name="message" placeholder="Décrivez votre projet, vos objectifs, vos contraintes, ou toute information qui pourrait m'aider à mieux comprendre vos besoins…" required></textarea></div>
+            <input type="hidden" name="_subject" value="Nouvelle demande de devis — portfolio denistossou.com">
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <button type="submit" class="btn btn-primary"><span class="btn-label" id="submitLabel">Envoyer</span><span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+            <button type="submit" class="btn btn-primary"><span class="btn-label" id="submitLabel">Envoyer ma demande</span><span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
             <p class="form-note" id="formNote">Tes coordonnées ne sont utilisées que pour te répondre — aucune newsletter, aucun partage.</p>
           </form>
           <div class="contact-methods">
@@ -77,7 +114,7 @@
     <div class="faq-visual reveal in">
       <img src="assets/img/denis-faq.jpg" alt="Denis Tossou animant une présentation marketing digital">
       <div class="chat-bubble">J'aimerais discuter avec vous</div>
-      <div class="chat-fab"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.5L5 21l4.1-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2Z"/></svg></div>
+      <a href="https://wa.me/2290166659250" target="_blank" rel="noopener" class="chat-fab" aria-label="Discuter sur WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.5L5 21l4.1-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2Z"/></svg></a>
     </div>
     <div class="reveal reveal-delay-1 in">
       <span class="eyebrow">FAQ</span>

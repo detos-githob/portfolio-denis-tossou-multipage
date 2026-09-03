@@ -1,0 +1,81 @@
+# ============================================================================
+# Configuration Decap CMS — panneau d'administration du portfolio
+#
+# ⚠️ À COMPLÉTER avant de mettre en ligne (voir le guide GUIDE-ADMIN.md) :
+#   1. repo        -> remplace "TON_PSEUDO_GITHUB/TON_DEPOT" par ton dépôt réel
+#   2. base_url    -> remplace par l'URL de ton Cloudflare Worker une fois déployé
+# ============================================================================
+
+backend:
+  name: github
+  repo: TON_PSEUDO_GITHUB/TON_DEPOT
+  branch: main
+  base_url: https://REMPLACE-PAR-TON-WORKER.workers.dev
+  auth_endpoint: auth
+
+# Là où les images ajoutées depuis le CMS seront rangées
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+# Affiche un bouton "Voir le site" et "Aperçu" dans l'interface
+site_url: https://TON-DOMAINE.com
+display_url: https://TON-DOMAINE.com
+
+collections:
+  - name: "projects"
+    label: "Projets"
+    files:
+      - file: "data/projects.json"
+        label: "Liste des projets"
+        name: "projects"
+        fields:
+          - label: "Projets"
+            name: "items"
+            widget: "list"
+            summary: "{{title}} — {{category}}"
+            fields:
+              - { label: "Titre du projet", name: "title", widget: "string" }
+              - label: "Domaine"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Développement", value: "developpement" }
+                  - { label: "Design", value: "design" }
+                  - { label: "Marketing digital", value: "marketing" }
+              - label: "Statut"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Terminé", value: "termine" }
+                  - { label: "En cours", value: "encours" }
+                default: "termine"
+              - label: "Image de la fiche"
+                name: "image"
+                widget: "image"
+                hint: "Photo du projet, ou logo si c'est une fiche d'identité visuelle."
+              - label: "Type d'image"
+                name: "imageStyle"
+                widget: "select"
+                options:
+                  - { label: "Photo / capture d'écran (remplit le cadre)", value: "cover" }
+                  - { label: "Logo (centré sur fond blanc)", value: "contain" }
+                default: "cover"
+              - label: "Badge affiché sur la vignette"
+                name: "badge"
+                widget: "string"
+                required: false
+                hint: "Court texte affiché en haut de l'image, ex. le nom du client."
+              - label: "Résumé"
+                name: "summary"
+                widget: "text"
+              - label: "Lien vers le projet (optionnel)"
+                name: "link"
+                widget: "string"
+                required: false
+                hint: "Laisse vide si le projet n'a pas de lien public. Affiche un bouton « Voir le projet »."
+              - label: "Points clés (optionnel)"
+                name: "features"
+                widget: "list"
+                required: false
+                field: { label: "Point", name: "item", widget: "string" }
+                hint: "Utilisé surtout pour les fiches Marketing digital (ex. community management)."
