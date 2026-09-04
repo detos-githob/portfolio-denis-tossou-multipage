@@ -8,7 +8,7 @@
 
 backend:
   name: github
-  repo: detos-githob/TON_DEPOT
+  repo: repo: detos-githob/portfolio-denis-tossou-multipage
   branch: main
   base_url: https://decap-oauth-tossou.jerbtos.workers.dev
   auth_endpoint: auth
