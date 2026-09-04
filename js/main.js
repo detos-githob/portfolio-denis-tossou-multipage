@@ -218,7 +218,7 @@ function projectCardHTML(p, i){
   return `
     <div class="p-card reveal ${delayClass}" data-category="${escapeHTML(p.category)}">
       <div class="${thumbClass}">
-        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}">
+        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}" loading="lazy" decoding="async">
         <span class="status-badge ${statusClass}">${statusLabel}</span>
         ${p.badge ? `<span class="thumb-badge">${escapeHTML(p.badge)}</span>` : ''}
       </div>

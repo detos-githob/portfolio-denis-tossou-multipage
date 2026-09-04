@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cms-oauth-worker/
+
+Sitemap: https://denistossou.com/sitemap.xml
