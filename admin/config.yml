@@ -8,9 +8,9 @@
 
 backend:
   name: github
-  repo: TON_PSEUDO_GITHUB/TON_DEPOT
+  repo: detos-githob/portfolio-denis-tossou-multipage
   branch: main
-  base_url: https://REMPLACE-PAR-TON-WORKER.workers.dev
+     base_url: https://decap-oauth-tossou.jerbtos.workers.dev
   auth_endpoint: auth
 
 # Là où les images ajoutées depuis le CMS seront rangées
