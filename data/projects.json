@@ -1,6 +1,21 @@
 {
   "items": [
     {
+      "badge": "JT Service",
+      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
+      "status": "termine",
+      "imageStyle": "cover",
+      "title": "JT Service — Community management",
+      "link": "",
+      "image": "assets/img/proj-jtservice-community.webp",
+      "features": [
+        "Stratégie de contenu et publication régulière",
+        "Gestion de la page Facebook",
+        "Résultat chiffré à ajouter dès disponibilité"
+      ],
+      "category": "marketing"
+    },
+    {
       "badge": "MEMEB",
       "summary": "Conception et développement du site vitrine de l'entreprise, réalisés dans le cadre de mon stage chez Nerdx Academy.",
       "status": "termine",
@@ -85,21 +100,6 @@
       "title": "Edushop — Community management",
       "link": "",
       "image": "assets/img/proj-edushop-community.webp",
-      "features": [
-        "Stratégie de contenu et publication régulière",
-        "Gestion de la page Facebook",
-        "Résultat chiffré à ajouter dès disponibilité"
-      ],
-      "category": "marketing"
-    },
-    {
-      "badge": "JT Service",
-      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
-      "status": "termine",
-      "imageStyle": "cover",
-      "title": "JT Service — Community management",
-      "link": "",
-      "image": "assets/img/proj-jtservice-community.webp",
       "features": [
         "Stratégie de contenu et publication régulière",
         "Gestion de la page Facebook",
