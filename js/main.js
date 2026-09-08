@@ -218,7 +218,7 @@ function projectCardHTML(p, i){
   return `
     <div class="p-card reveal ${delayClass}" data-category="${escapeHTML(p.category)}">
       <div class="${thumbClass}">
-        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}" loading="lazy" decoding="async">
+        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}">
         <span class="status-badge ${statusClass}">${statusLabel}</span>
         ${p.badge ? `<span class="thumb-badge">${escapeHTML(p.badge)}</span>` : ''}
       </div>
@@ -239,7 +239,9 @@ async function loadProjects(){
     const res = await fetch(source);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    const items = data.items || [];
+    // Dans le CMS, les nouveaux projets sont ajoutés en bas de la liste ;
+    // on inverse donc l'ordre pour que les plus récents s'affichent en premier sur le site.
+    const items = [...(data.items || [])].reverse();
     portfolioGrid.innerHTML = items.map((p,i)=>projectCardHTML(p,i)).join('');
     applyReveal(portfolioGrid);
   } catch (err) {
