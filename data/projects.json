@@ -1,111 +1,122 @@
 {
   "items": [
     {
-      "title": "Ets MEMEB — Site vitrine",
-      "category": "developpement",
+      "badge": "JT Service",
+      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
       "status": "termine",
-      "image": "assets/img/proj-memeb-vitrine.webp",
       "imageStyle": "cover",
+      "title": "JT Service — Community management",
+      "link": "",
+      "image": "assets/img/proj-jtservice-community.webp",
+      "features": [
+        "Stratégie de contenu et publication régulière",
+        "Gestion de la page Facebook",
+        "Résultat chiffré à ajouter dès disponibilité"
+      ],
+      "category": "marketing"
+    },
+    {
       "badge": "MEMEB",
       "summary": "Conception et développement du site vitrine de l'entreprise, réalisés dans le cadre de mon stage chez Nerdx Academy.",
+      "status": "termine",
+      "imageStyle": "cover",
+      "title": "Ets MEMEB — Site vitrine",
       "link": "",
-      "features": []
+      "image": "assets/img/proj-memeb-vitrine.webp",
+      "features": [],
+      "category": "developpement"
     },
     {
-      "title": "Sites web — Edushop, Be The Best, Wopas, Best Bénin",
-      "category": "developpement",
-      "status": "termine",
-      "image": "assets/img/proj-sites-web.webp",
-      "imageStyle": "cover",
       "badge": "Site web",
       "summary": "Participation au développement de plusieurs sites web pour ces structures, dans le cadre de mon stage chez Nerdx Academy.",
+      "status": "termine",
+      "imageStyle": "cover",
+      "title": "Sites web — Edushop, Be The Best, Wopas, Best Bénin",
       "link": "https://edushop.africa",
-      "features": []
+      "image": "assets/img/proj-sites-web.webp",
+      "features": [],
+      "category": "developpement"
     },
     {
-      "title": "Ets MEMEB — Identité visuelle",
-      "category": "design",
-      "status": "termine",
-      "image": "assets/img/logo-memeb.webp",
-      "imageStyle": "contain",
       "badge": "MEMEB",
       "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "status": "termine",
+      "imageStyle": "contain",
+      "title": "Ets MEMEB — Identité visuelle",
       "link": "",
-      "features": []
+      "image": "assets/img/logo-memeb.webp",
+      "features": [],
+      "category": "design"
     },
     {
-      "title": "JT Service — Identité visuelle",
-      "category": "design",
-      "status": "termine",
-      "image": "assets/img/logo-jtservice.webp",
-      "imageStyle": "contain",
       "badge": "JT Service",
       "summary": "Création du logo, de la charte graphique, d'affiches et de visuels de communication.",
+      "status": "termine",
+      "imageStyle": "contain",
+      "title": "JT Service — Identité visuelle",
       "link": "",
-      "features": []
+      "image": "assets/img/logo-jtservice.webp",
+      "features": [],
+      "category": "design"
     },
     {
-      "title": "Farhane and Company Sarl — Identité visuelle",
-      "category": "design",
-      "status": "termine",
-      "image": "assets/img/logo-farhane.webp",
-      "imageStyle": "contain",
       "badge": "Farhane",
       "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "status": "termine",
+      "imageStyle": "contain",
+      "title": "Farhane and Company Sarl — Identité visuelle",
       "link": "",
-      "features": []
+      "image": "assets/img/logo-farhane.webp",
+      "features": [],
+      "category": "design"
     },
     {
-      "title": "Pro Energy and BTP Sarl — Identité visuelle",
-      "category": "design",
-      "status": "termine",
-      "image": "assets/img/logo-proenergy.webp",
-      "imageStyle": "contain",
       "badge": "Pro Energy",
       "summary": "Conception de visuels, de branding et d'identité visuelle pour l'entreprise.",
+      "status": "termine",
+      "imageStyle": "contain",
+      "title": "Pro Energy and BTP Sarl — Identité visuelle",
       "link": "",
-      "features": []
+      "image": "assets/img/logo-proenergy.webp",
+      "features": [],
+      "category": "design"
     },
     {
-      "title": "Don de Dieu & Lynares Agro — Logos & chartes graphiques",
-      "category": "design",
-      "status": "termine",
-      "image": "assets/img/logo-lynares.webp",
-      "imageStyle": "contain",
       "badge": "Lynares Agro",
       "summary": "Création de logos, de chartes graphiques et d'affiches pour ces deux entreprises.",
+      "status": "termine",
+      "imageStyle": "contain",
+      "title": "Don de Dieu & Lynares Agro — Logos & chartes graphiques",
       "link": "",
-      "features": []
+      "image": "assets/img/logo-lynares.webp",
+      "features": [],
+      "category": "design"
     },
     {
-      "title": "Edushop — Community management",
-      "category": "marketing",
-      "status": "termine",
-      "image": "assets/img/proj-edushop-community.webp",
-      "imageStyle": "cover",
       "badge": "Edushop",
       "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
+      "status": "termine",
+      "imageStyle": "cover",
+      "title": "Edushop — Community management",
       "link": "",
+      "image": "assets/img/proj-edushop-community.webp",
       "features": [
         "Stratégie de contenu et publication régulière",
         "Gestion de la page Facebook",
         "Résultat chiffré à ajouter dès disponibilité"
-      ]
+      ],
+      "category": "marketing"
     },
     {
-      "title": "JT Service — Community management",
-      "category": "marketing",
-      "status": "termine",
-      "image": "assets/img/proj-jtservice-community.webp",
+      "badge": "En cour",
+      "summary": "JTS SERVICE est une entreprise béninoise spécialisée dans les prestations de services en électricité bâtiment, électricité industrielle et solutions photovoltaïques.\n\nDans le cadre de ce projet, j’ai conçu et développé un site web professionnel visant à renforcer la présence digitale de l’entreprise, valoriser son expertise et présenter clairement ses services et réalisations.\n\nL’objectif était de doter JTS SERVICE d’une vitrine digitale moderne, crédible et accessible, capable de renforcer son image de marque, rassurer ses prospects et améliorer son positionnement sur le marché béninois.\n",
+      "status": "encours",
       "imageStyle": "cover",
-      "badge": "JT Service",
-      "summary": "Stratégie de communication, gestion de la page Facebook et création de contenus.",
-      "link": "",
-      "features": [
-        "Stratégie de contenu et publication régulière",
-        "Gestion de la page Facebook",
-        "Résultat chiffré à ajouter dès disponibilité"
-      ]
+      "title": "site vitrine de JTS SERVICE",
+      "link": "https://jts-service.denistossou.com",
+      "image": "/assets/img/uploads/capture-d-écran-2026-09-07-081541.png",
+      "features": [],
+      "category": "developpement"
     }
   ]
 }
