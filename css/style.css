@@ -123,8 +123,7 @@ section{position:relative;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-img{height:38px;width:auto;display:block;}
-.footer-brand .logo-img-wrap{display:inline-flex;align-items:center;background:var(--white);border-radius:12px;padding:8px 16px;}
-.footer-brand .logo-img{height:34px;}
+.footer-brand .logo-img{height:38px;}
 nav.main-nav{display:flex;align-items:center;gap:30px;}
 nav.main-nav a{
   font-size:13.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);
