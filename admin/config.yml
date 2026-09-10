@@ -79,3 +79,32 @@ collections:
                 required: false
                 field: { label: "Point", name: "item", widget: "string" }
                 hint: "Utilisé surtout pour les fiches Marketing digital (ex. community management)."
+
+  - name: "blog"
+    label: "Blog"
+    files:
+      - file: "data/blog.json"
+        label: "Articles du blog"
+        name: "blog"
+        fields:
+          - label: "Articles"
+            name: "items"
+            widget: "list"
+            summary: "{{title}} — {{date}}"
+            fields:
+              - { label: "Titre de l'article", name: "title", widget: "string" }
+              - label: "Slug (identifiant dans l'URL)"
+                name: "slug"
+                widget: "string"
+                hint: "Uniquement lettres minuscules, chiffres et tirets, sans espace ni accent. Ex. : mes-derniers-projets. Ne le change pas après publication (les liens déjà partagés casseraient)."
+              - { label: "Date de publication", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - label: "Image de couverture"
+                name: "cover"
+                widget: "image"
+              - label: "Résumé (affiché sur la liste des articles)"
+                name: "excerpt"
+                widget: "text"
+              - label: "Contenu de l'article"
+                name: "body"
+                widget: "markdown"
+                hint: "Le contenu complet de l'article. Mise en forme (titres, gras, listes, liens...) via la barre d'outils."

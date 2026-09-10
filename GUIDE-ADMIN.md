@@ -107,7 +107,10 @@ Envoie (`git push`) cette modification — Cloudflare republie automatiquement.
    **Liste des projets** → tu peux ajouter, modifier, réordonner ou
    supprimer une fiche projet avec un vrai formulaire (titre, catégorie,
    statut, image, résumé, lien, points clés).
-5. Clique **Publish** en haut à droite pour mettre en ligne.
+5. Collection **Blog** → fichier **Articles du blog** → même principe pour
+   ajouter, modifier ou supprimer un article (titre, slug, date, image de
+   couverture, résumé, contenu en Markdown).
+6. Clique **Publish** en haut à droite pour mettre en ligne.
 
 ---
 
@@ -122,12 +125,25 @@ Envoie (`git push`) cette modification — Cloudflare republie automatiquement.
 - Réordonner les projets par glisser-déposer
 - Supprimer un projet (icône corbeille sur sa fiche)
 
+### Côté Blog
+
+- Ajouter un article (bouton **New Blog** en bas de la liste) : titre, slug,
+  date, image de couverture, résumé et contenu (Markdown, avec barre d'outils
+  pour les titres, le gras, les listes, les liens...)
+- Modifier ou supprimer un article existant
+- **Important sur le slug** : c'est ce qui compose l'adresse de l'article
+  (`article.html?slug=ton-slug`). Choisis-le une fois et évite de le changer
+  après publication — sinon les liens déjà partagés (réseaux sociaux, etc.)
+  ne fonctionneront plus.
+- Le dernier article ajouté s'affiche automatiquement en premier sur
+  `blog.html`, pas besoin de le placer manuellement en haut de la liste.
+
 ## Limites à connaître
 
-- **Un seul type de contenu géré pour l'instant** : les projets. Le reste du
-  site (textes des autres pages, tarifs, etc.) reste à modifier dans le code
-  comme avant. Si tu veux qu'on rende d'autres sections éditables de la même
-  façon (témoignages, tarifs...), dis-le-moi.
+- **Deux types de contenu gérés pour l'instant** : les projets et les
+  articles de blog. Le reste du site (textes des autres pages, tarifs, etc.)
+  reste à modifier dans le code comme avant. Si tu veux qu'on rende d'autres
+  sections éditables de la même façon (témoignages, tarifs...), dis-le-moi.
 - **Un compte = un accès total** : n'importe qui connecté avec un compte
   GitHub ayant accès en écriture à ce dépôt peut modifier le contenu. Tant
   que le dépôt reste privé et que tu es seul dessus, aucun souci.

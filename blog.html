@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Denis Tossou</title>
+<meta name="description" content="Actualités, conseils et retours d'expérience de Denis Tossou sur le développement web, le design et le marketing digital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="assets/img/logo-header.png" alt="Denis Tossou" class="logo-img"></a>
+    <nav class="main-nav">
+      <a href="index.html">Accueil</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="projets.html">Projets</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="contact.html" class="btn btn-dark">
+        <span class="btn-label">Discutons</span>
+        <span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+      <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav">
+    <a href="index.html">Accueil</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="projets.html">Projets</a>
+    <a href="blog.html">Blog</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<div class="page-hero reveal in">
+  <div class="container">
+    <span class="eyebrow">Blog</span>
+    <h1>Actualités &amp; réflexions</h1>
+    <p>Conseils, retours d'expérience et coulisses de mes projets en développement web, design et marketing digital.</p>
+  </div>
+</div>
+
+<section class="blog-list">
+  <div class="container">
+    <div class="blog-grid" id="blogGrid" data-source="data/blog.json">
+      <p class="blog-loading" style="text-align:center;color:var(--muted);grid-column:1/-1;">Chargement des articles…</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner reveal in">
+  <div class="inner">
+    <h2>Un projet en tête ? Discutons-en.</h2>
+    <a href="https://wa.me/2290166659250" class="chat-link" target="_blank" rel="noopener">Pour une réponse rapide : <span class="ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.5L5 21l4.1-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2Z"/></svg></span> Écrivez sur WhatsApp</a>
+    <div class="row"><a href="contact.html" class="btn btn-primary"><span class="btn-label">Discutons de votre projet</span><span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo"><img src="assets/img/logo-footer.png" alt="Denis Tossou" class="logo-img footer-logo"></a>
+      <p>Référent digital<br>Hèvié, Abomey-Calavi, Bénin</p>
+      <div class="footer-social">
+        <a href="mailto:info@denistossou.com" class="icon-chip" aria-label="Email"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="https://wa.me/2290166659250" class="icon-chip" aria-label="WhatsApp" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.5L5 21l4.1-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2Z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul><li><a href="a-propos.html">À propos</a></li><li><a href="projets.html">Projets</a></li><li><a href="blog.html">Blog</a></li><li><a href="services.html">Services</a></li><li><a href="a-propos.html#cv">CV</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul><li><a href="mailto:info@denistossou.com">info@denistossou.com</a></li><li><a href="https://wa.me/2290166659250" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="tel:+2290140407616">+229 01 40 40 76 16</a></li></ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Denis Tossou. Tous droits réservés.</span>
+    <span>Site en plusieurs pages</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/2290166659250" class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+  <span class="wa-tooltip">Discuter sur WhatsApp</span>
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.5L5 21l4.1-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2Z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>

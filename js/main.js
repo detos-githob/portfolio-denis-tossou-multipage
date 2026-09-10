@@ -266,6 +266,103 @@ if (filterBtns.length) {
   });
 }
 
+/* ========================= BLOG — liste (blog.html) chargée depuis data/blog.json ========================= */
+const blogGrid = document.getElementById('blogGrid');
+
+function formatFRDate(dateStr){
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d)) return dateStr;
+  return d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+}
+
+function blogCardHTML(a, i){
+  const delayClass = ['','reveal-delay-1','reveal-delay-2'][i % 3];
+  return `
+    <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="blog-card reveal ${delayClass}">
+      <div class="thumb">
+        <img src="${escapeHTML(a.cover)}" alt="${escapeHTML(a.title)}">
+      </div>
+      <div class="body">
+        <span class="blog-date">${escapeHTML(formatFRDate(a.date))}</span>
+        <h4>${escapeHTML(a.title)}</h4>
+        <p class="summary">${escapeHTML(a.excerpt)}</p>
+        <span class="blog-readmore">Lire l'article
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>`;
+}
+
+async function loadBlog(){
+  if (!blogGrid) return;
+  const source = blogGrid.dataset.source;
+  try {
+    const res = await fetch(source);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    // Comme pour les projets, les nouveaux articles sont ajoutés en bas de
+    // la liste par le CMS ; on inverse donc l'ordre pour afficher les plus récents en premier.
+    const items = [...(data.items || [])].reverse();
+    if (!items.length) {
+      blogGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Aucun article publié pour le moment.</p>';
+      return;
+    }
+    blogGrid.innerHTML = items.map((a,i)=>blogCardHTML(a,i)).join('');
+    applyReveal(blogGrid);
+  } catch (err) {
+    blogGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les articles pour le moment.</p>';
+    console.error('Erreur de chargement du blog :', err);
+  }
+}
+loadBlog();
+
+/* ========================= BLOG — article individuel (article.html) ========================= */
+const articleContent = document.getElementById('articleContent');
+
+async function loadArticle(){
+  if (!articleContent) return;
+  const source = articleContent.dataset.source;
+  const slug = new URLSearchParams(window.location.search).get('slug');
+
+  if (!slug) {
+    articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Article introuvable. <a href="blog.html">Retour au blog</a>.</p>';
+    return;
+  }
+
+  try {
+    const res = await fetch(source);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const article = (data.items || []).find(a => a.slug === slug);
+
+    if (!article) {
+      articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Cet article n\'existe pas ou a été retiré. <a href="blog.html">Retour au blog</a>.</p>';
+      return;
+    }
+
+    document.title = article.title + ' — Denis Tossou';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', article.excerpt || '');
+
+    const bodyHTML = (window.marked ? marked.parse(article.body || '') : `<p>${escapeHTML(article.body || '')}</p>`);
+
+    articleContent.innerHTML = `
+      <div class="article-head reveal in">
+        <span class="blog-date">${escapeHTML(formatFRDate(article.date))}</span>
+        <h1>${escapeHTML(article.title)}</h1>
+      </div>
+      <div class="article-cover reveal in"><img src="${escapeHTML(article.cover)}" alt="${escapeHTML(article.title)}"></div>
+      <div class="article-body reveal in">${bodyHTML}</div>
+    `;
+    applyReveal(articleContent);
+  } catch (err) {
+    articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Impossible de charger cet article pour le moment.</p>';
+    console.error('Erreur de chargement de l\'article :', err);
+  }
+}
+loadArticle();
+
 /* ========================= TEMOIGNAGES — carrousel ========================= */
 const testiSlides = document.querySelectorAll('.testi-slide');
 const testiDots = document.querySelectorAll('.testi-dots .d');
@@ -301,7 +398,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 
-/* ========================= FORMULAIRE DE CONTACT — Formspree ========================= */
+/* ========================= FORMULAIRE DE CONTACT — /api/contact ========================= */
 const form = document.getElementById('contactForm');
 if (form) {
   /* Pré-remplissage depuis l'URL (ex. contact.html?service=developpement&budget=starter) */

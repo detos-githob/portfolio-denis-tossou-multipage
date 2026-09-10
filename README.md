@@ -6,10 +6,13 @@
 index.html        → Accueil (hero carrousel, stats, services, pourquoi me choisir)
 a-propos.html      → À propos (qui suis-je, compétences, CV, valeurs, vision)
 projets.html       → Projets (grille filtrable, témoignages, partenaires)
+blog.html          → Blog (liste des articles, chargée depuis data/blog.json)
+article.html       → Article de blog individuel (?slug=...), rendu Markdown
 services.html      → Services (provisoire — contenu à retravailler ensemble)
-contact.html       → Contact (formulaire Formspree actif, FAQ)
-css/style.css       → Tout le style, partagé par les 5 pages
-js/main.js          → Tout le comportement (carrousel, animations, formulaire...)
+contact.html       → Contact (formulaire branché sur /api/contact, FAQ)
+css/style.css       → Tout le style, partagé par toutes les pages
+js/main.js          → Tout le comportement (carrousel, animations, formulaire, blog...)
+data/blog.json      → Les articles du blog, édités par le CMS (/admin)
 assets/img/         → Toutes les images (photos, logos, icônes)
 ```
 
@@ -43,19 +46,25 @@ concernée.
 
 ## Avant mise en ligne
 
-- Le formulaire de contact est déjà connecté à Formspree
-  (`https://formspree.io/f/moearrjp`). Si tu changes d'endpoint,
-  remplace-le uniquement dans `contact.html`.
+- Le formulaire de contact envoie ses données à `/api/contact` (voir
+  `GUIDE-MESSAGES.md` pour l'activer) — les messages sont enregistrés dans
+  une base D1 et consultables depuis `/admin/messages.html`.
 - Un seul lien "Voir le projet" est actif (Edushop → edushop.africa) car
   c'est la seule URL réelle confirmée. Ajoute `<div class="card-cta">...</div>`
   (voir le modèle dans `projets.html`) dès que tu as d'autres URLs.
 
 ## Hébergement
 
-Le site est 100% statique (HTML/CSS/JS, aucun serveur requis). Héberge le
-dossier complet sur Netlify, Cloudflare Pages ou GitHub Pages — glisse-dépose
-le dossier entier (pas juste `index.html`) pour que le CSS, le JS et les
-images suivent.
+Les pages du site (HTML/CSS/JS/images) sont 100% statiques et peuvent être
+hébergées n'importe où (Netlify, Cloudflare Pages, GitHub Pages...).
+
+**Exception : le formulaire de contact** (`contact.html` → `/api/contact`)
+et le tableau de bord des messages (`/admin/messages.html`) reposent sur les
+**Cloudflare Pages Functions** et une base **Cloudflare D1** (voir
+`GUIDE-MESSAGES.md`) — ces deux fonctionnalités ne marchent que si le site
+est hébergé sur **Cloudflare Pages**. Si un jour tu changes d'hébergeur pour
+le reste du site, il faudra rebrancher le formulaire sur un autre service
+(ex. reconnecter Formspree).
 
 ## Panneau d'administration (ajouter des projets sans coder)
 
@@ -67,7 +76,13 @@ une seule fois).
 
 Fichiers concernés :
 - `admin/index.html` et `admin/config.yml` — l'interface d'administration
-- `data/projects.json` — les données des projets, éditées par le CMS et lues
-  par `js/main.js` pour construire les fiches sur `projets.html`
+- `data/projects.json` et `data/blog.json` — les données éditées par le CMS
 - `cms-oauth-worker/worker.js` — le code à déployer sur Cloudflare Workers
   pour gérer la connexion GitHub (pas un fichier du site, à déployer à part)
+
+## Messages du formulaire de contact (sans Formspree)
+
+Le formulaire de contact enregistre désormais les messages directement dans
+une base Cloudflare D1, consultables depuis `/admin/messages.html` (marquer
+lu/traité, répondre, supprimer). Suis **`GUIDE-MESSAGES.md`** pour
+l'activer — nécessite Cloudflare Pages (voir « Hébergement » ci-dessus).

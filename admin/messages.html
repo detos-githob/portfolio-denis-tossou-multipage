@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Messages — Tableau de bord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#f4841e; --orange-2:#ffb648; --orange-dark:#dd6f0e;
+    --ink:#14161a; --ink-soft:#3a3d44; --muted:#6d7178; --line:#e4e6e8;
+    --bg:#eef0f1; --bg-soft:#f6f7f8; --white:#fff;
+    --radius-lg:22px; --radius-md:16px; --radius-sm:10px; --radius-pill:999px;
+    --shadow-soft:0 12px 30px -18px rgba(20,22,26,.18);
+    --shadow-card:0 20px 45px -25px rgba(20,22,26,.25);
+    --ff:'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--ff);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  button{font-family:var(--ff);cursor:pointer;}
+  .wrap{max-width:920px;margin:0 auto;padding:36px 24px 80px;}
+  header.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+  header.bar h1{font-size:22px;font-weight:800;margin:0;}
+  header.bar .links{display:flex;gap:10px;font-size:13px;font-weight:600;}
+  header.bar .links a{padding:9px 16px;border-radius:var(--radius-pill);background:var(--white);border:1px solid var(--line);transition:border-color .2s;}
+  header.bar .links a:hover{border-color:var(--ink);}
+
+  .tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+  .tab{padding:10px 18px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--white);font-size:13px;font-weight:700;transition:all .2s;}
+  .tab.active{background:var(--ink);color:var(--white);border-color:var(--ink);}
+  .tab .count{opacity:.65;margin-left:5px;}
+
+  #list{display:flex;flex-direction:column;gap:14px;}
+  .msg-card{background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);overflow:hidden;border-left:4px solid var(--line);transition:box-shadow .2s;}
+  .msg-card.status-nouveau{border-left-color:var(--orange);}
+  .msg-card.status-lu{border-left-color:#21aee5;}
+  .msg-card.status-traite{border-left-color:#1f9d55;}
+  .msg-card:hover{box-shadow:var(--shadow-card);}
+  .msg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:18px 20px;cursor:pointer;}
+  .msg-head-main{min-width:0;}
+  .msg-name{font-weight:800;font-size:15px;}
+  .msg-meta{font-size:12.5px;color:var(--muted);margin-top:3px;}
+  .msg-excerpt{font-size:13.5px;color:var(--ink-soft);margin-top:8px;max-width:600px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .badge{flex-shrink:0;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:5px 11px;border-radius:var(--radius-pill);color:#fff;white-space:nowrap;}
+  .badge.nouveau{background:var(--orange);}
+  .badge.lu{background:#21aee5;}
+  .badge.traite{background:#1f9d55;}
+
+  .msg-body{display:none;padding:0 20px 20px;border-top:1px solid var(--bg-soft);}
+  .msg-card.open .msg-body{display:block;}
+  .msg-field{margin-top:14px;font-size:13.5px;}
+  .msg-field .label{font-weight:700;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .msg-full-text{white-space:pre-wrap;line-height:1.65;background:var(--bg-soft);border-radius:var(--radius-sm);padding:14px 16px;margin-top:6px;}
+  .msg-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .btn-sm{padding:9px 15px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--white);font-size:12.5px;font-weight:700;transition:all .2s;}
+  .btn-sm:hover{border-color:var(--ink);}
+  .btn-sm.danger{color:#c0392b;}
+  .btn-sm.danger:hover{border-color:#c0392b;background:#fdf1ef;}
+  .btn-sm.primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .empty,.loading,.error{text-align:center;color:var(--muted);padding:60px 20px;font-size:14px;}
+  .error{color:#c0392b;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <h1>Messages du formulaire</h1>
+    <div class="links">
+      <a href="/admin/">CMS (projets &amp; blog)</a>
+      <a href="/cdn-cgi/access/logout">Déconnexion</a>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-filter="tous">Tous <span class="count" id="count-tous"></span></button>
+    <button class="tab" data-filter="nouveau">Nouveaux <span class="count" id="count-nouveau"></span></button>
+    <button class="tab" data-filter="lu">Lus <span class="count" id="count-lu"></span></button>
+    <button class="tab" data-filter="traite">Traités <span class="count" id="count-traite"></span></button>
+  </div>
+
+  <div id="list"><p class="loading">Chargement des messages…</p></div>
+</div>
+
+<script>
+const SERVICE_LABELS = {
+  developpement: "Développement web",
+  design: "Design graphique / Identité visuelle",
+  marketing: "Marketing digital / Réseaux sociaux",
+  autre: "Autre / Plusieurs services"
+};
+const STATUS_LABELS = { nouveau: "Nouveau", lu: "Lu", traite: "Traité" };
+
+const listEl = document.getElementById('list');
+const tabs = document.querySelectorAll('.tab');
+let allMessages = [];
+let currentFilter = 'tous';
+
+function escapeHTML(str){
+  return String(str == null ? '' : str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatDate(iso){
+  const d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }) + ' à ' +
+         d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+}
+
+function updateCounts(){
+  const counts = { tous: allMessages.length, nouveau: 0, lu: 0, traite: 0 };
+  allMessages.forEach(m => { if (counts[m.status] !== undefined) counts[m.status]++; });
+  Object.keys(counts).forEach(k => {
+    const el = document.getElementById('count-' + k);
+    if (el) el.textContent = counts[k] ? '(' + counts[k] + ')' : '';
+  });
+}
+
+function cardHTML(m){
+  const serviceLabel = SERVICE_LABELS[m.service] || m.service || '';
+  return `
+    <div class="msg-card status-${escapeHTML(m.status)}" data-id="${m.id}">
+      <div class="msg-head" onclick="toggleCard(${m.id})">
+        <div class="msg-head-main">
+          <div class="msg-name">${escapeHTML(m.nom)} — <a href="mailto:${escapeHTML(m.email)}" onclick="event.stopPropagation()">${escapeHTML(m.email)}</a></div>
+          <div class="msg-meta">${escapeHTML(formatDate(m.created_at))} · ${escapeHTML(serviceLabel)}${m.entreprise ? ' · ' + escapeHTML(m.entreprise) : ''}</div>
+          <div class="msg-excerpt">${escapeHTML(m.message)}</div>
+        </div>
+        <span class="badge ${escapeHTML(m.status)}">${escapeHTML(STATUS_LABELS[m.status] || m.status)}</span>
+      </div>
+      <div class="msg-body">
+        ${m.budget ? `<div class="msg-field"><div class="label">Budget</div>${escapeHTML(m.budget)}</div>` : ''}
+        ${m.delai ? `<div class="msg-field"><div class="label">Délai souhaité</div>${escapeHTML(m.delai)}</div>` : ''}
+        <div class="msg-field">
+          <div class="label">Message complet</div>
+          <div class="msg-full-text">${escapeHTML(m.message)}</div>
+        </div>
+        <div class="msg-actions">
+          <a class="btn-sm primary" href="mailto:${escapeHTML(m.email)}?subject=${encodeURIComponent('Re: votre demande sur denistossou.com')}">Répondre par email</a>
+          ${m.status !== 'lu' ? `<button class="btn-sm" onclick="setStatus(${m.id},'lu')">Marquer lu</button>` : ''}
+          ${m.status !== 'traite' ? `<button class="btn-sm" onclick="setStatus(${m.id},'traite')">Marquer traité</button>` : ''}
+          ${m.status !== 'nouveau' ? `<button class="btn-sm" onclick="setStatus(${m.id},'nouveau')">Remettre en nouveau</button>` : ''}
+          <button class="btn-sm danger" onclick="deleteMessage(${m.id})">Supprimer</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function render(){
+  const items = currentFilter === 'tous' ? allMessages : allMessages.filter(m => m.status === currentFilter);
+  if (!items.length) {
+    listEl.innerHTML = '<p class="empty">Aucun message dans cette catégorie.</p>';
+    return;
+  }
+  listEl.innerHTML = items.map(cardHTML).join('');
+}
+
+function toggleCard(id){
+  const card = document.querySelector(`.msg-card[data-id="${id}"]`);
+  if (card) card.classList.toggle('open');
+}
+
+async function loadMessages(){
+  try {
+    const res = await fetch('/api/messages');
+    if (res.status === 401 || res.status === 403) {
+      listEl.innerHTML = '<p class="error">Accès refusé — reconnecte-toi via le lien envoyé par Cloudflare Access.</p>';
+      return;
+    }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'unknown_error');
+    allMessages = data.items || [];
+    updateCounts();
+    render();
+  } catch (err) {
+    listEl.innerHTML = '<p class="error">Impossible de charger les messages. Vérifie que la base D1 est bien liée au projet (voir GUIDE-MESSAGES.md).</p>';
+    console.error(err);
+  }
+}
+
+async function setStatus(id, status){
+  try {
+    const res = await fetch('/api/messages/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const m = allMessages.find(x => x.id === id);
+    if (m) m.status = status;
+    updateCounts();
+    render();
+  } catch (err) {
+    alert("La mise à jour a échoué, réessaie.");
+    console.error(err);
+  }
+}
+
+async function deleteMessage(id){
+  if (!confirm('Supprimer définitivement ce message ?')) return;
+  try {
+    const res = await fetch('/api/messages/' + id, { method: 'DELETE' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    allMessages = allMessages.filter(m => m.id !== id);
+    updateCounts();
+    render();
+  } catch (err) {
+    alert("La suppression a échoué, réessaie.");
+    console.error(err);
+  }
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentFilter = tab.dataset.filter;
+    render();
+  });
+});
+
+loadMessages();
+</script>
+</body>
+</html>

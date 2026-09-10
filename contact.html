@@ -18,6 +18,7 @@
       <a href="index.html">Accueil</a>
       <a href="a-propos.html">À propos</a>
       <a href="projets.html">Projets</a>
+      <a href="blog.html">Blog</a>
       <a href="services.html">Services</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
@@ -33,6 +34,7 @@
     <a href="index.html">Accueil</a>
     <a href="a-propos.html">À propos</a>
     <a href="projets.html">Projets</a>
+    <a href="blog.html">Blog</a>
     <a href="services.html">Services</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -45,7 +47,7 @@
       <div class="contact-body">
         <div class="contact-form">
           <p class="contact-lead">Décrivez votre projet en quelques champs, je reviens vers vous sous 24h avec une proposition claire.</p>
-          <form id="contactForm" action="https://formspree.io/f/moearrjp" method="POST">
+          <form id="contactForm" action="/api/contact" method="POST">
             <div class="field-row">
               <div class="field"><label for="f-nom">Nom complet *</label><input id="f-nom" type="text" name="nom" placeholder="Votre nom" required></div>
               <div class="field"><label for="f-email">Email *</label><input id="f-email" type="email" name="email" placeholder="votre@email.com" required></div>
@@ -86,7 +88,6 @@
               </div>
             </div>
             <div class="field"><label for="f-message">Décrivez votre projet *</label><textarea id="f-message" name="message" placeholder="Décrivez votre projet, vos objectifs, vos contraintes, ou toute information qui pourrait m'aider à mieux comprendre vos besoins…" required></textarea></div>
-            <input type="hidden" name="_subject" value="Nouvelle demande de devis — portfolio denistossou.com">
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <button type="submit" class="btn btn-primary"><span class="btn-label" id="submitLabel">Envoyer ma demande</span><span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
             <p class="form-note" id="formNote">Tes coordonnées ne sont utilisées que pour te répondre — aucune newsletter, aucun partage.</p>
@@ -151,7 +152,7 @@
     </div>
     <div class="footer-col">
       <h5>Navigation</h5>
-      <ul><li><a href="a-propos.html">À propos</a></li><li><a href="projets.html">Projets</a></li><li><a href="services.html">Services</a></li><li><a href="a-propos.html#cv">CV</a></li></ul>
+      <ul><li><a href="a-propos.html">À propos</a></li><li><a href="projets.html">Projets</a></li><li><a href="blog.html">Blog</a></li><li><a href="services.html">Services</a></li><li><a href="a-propos.html#cv">CV</a></li></ul>
     </div>
     <div class="footer-col">
       <h5>Contact</h5>

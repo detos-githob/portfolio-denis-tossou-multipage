@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "title": "Bienvenue sur le blog",
+      "slug": "bienvenue-sur-le-blog",
+      "date": "2026-09-10",
+      "cover": "assets/img/denis-hero.webp",
+      "excerpt": "Cet article a été créé automatiquement pour te montrer comment fonctionne le blog. Tu peux le modifier ou le supprimer directement depuis /admin.",
+      "body": "## Comment ça marche\n\nCet article est un exemple. Depuis le tableau de bord `/admin`, ouvre la collection **Blog**, clique sur cette fiche pour la modifier ou la supprimer, ou clique sur **New Blog** pour en créer une nouvelle.\n\nLe contenu de cette zone accepte le format **Markdown** :\n\n- des listes,\n- du texte en **gras** ou en *italique*,\n- des titres avec `##`,\n- des liens comme [celui-ci](https://denistossou.com).\n\nDès que tu cliques sur **Publier**, l'article apparaît automatiquement sur la page `blog.html`, sans toucher au code."
+    }
+  ]
+}
