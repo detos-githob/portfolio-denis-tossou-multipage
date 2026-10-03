@@ -1,16 +1,15 @@
 # ============================================================================
 # Configuration Decap CMS — panneau d'administration du portfolio
 #
-# ⚠️ À COMPLÉTER avant de mettre en ligne (voir le guide GUIDE-ADMIN.md) :
-#   1. repo        -> remplace "TON_PSEUDO_GITHUB/TON_DEPOT" par ton dépôt réel
-#   2. base_url    -> remplace par l'URL de ton Cloudflare Worker une fois déployé
+# ⚠️ NE PAS ÉCRASER ce fichier avec une version modèle : sans les vraies
+#    valeurs de "repo" et "base_url" ci-dessous, la connexion /admin casse.
 # ============================================================================
 
 backend:
   name: github
-  repo: TON_PSEUDO_GITHUB/TON_DEPOT
+  repo: detos-githob/portfolio-denis-tossou-multipage
   branch: main
-  base_url: https://REMPLACE-PAR-TON-WORKER.workers.dev
+  base_url: https://decap-oauth-tossou.jerbtos.workers.dev
   auth_endpoint: auth
 
 # Là où les images ajoutées depuis le CMS seront rangées
@@ -18,8 +17,8 @@ media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
 # Affiche un bouton "Voir le site" et "Aperçu" dans l'interface
-site_url: https://TON-DOMAINE.com
-display_url: https://TON-DOMAINE.com
+site_url: https://denistossou.com
+display_url: https://denistossou.com
 
 collections:
   - name: "projects"

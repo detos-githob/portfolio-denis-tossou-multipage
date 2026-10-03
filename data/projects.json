@@ -106,6 +106,17 @@
         "Gestion de la page Facebook",
         "Résultat chiffré à ajouter dès disponibilité"
       ]
+    },
+    {
+      "title": "Site vitrine de JTS SERVICE",
+      "category": "developpement",
+      "status": "encours",
+      "image": "/assets/img/uploads/jts-service-site-vitrine.png",
+      "imageStyle": "cover",
+      "badge": "JTS SERVICE",
+      "summary": "JTS SERVICE est une entreprise béninoise spécialisée dans les prestations de services en électricité bâtiment, électricité industrielle et solutions photovoltaïques.\n\nDans le cadre de ce projet, j’ai conçu et développé un site web professionnel visant à renforcer la présence digitale de l’entreprise, valoriser son expertise et présenter clairement ses services et réalisations.\n\nL’objectif était de doter JTS SERVICE d’une vitrine digitale moderne, crédible et accessible, capable de renforcer son image de marque, rassurer ses prospects et améliorer son positionnement sur le marché béninois.",
+      "link": "https://jts-service.denistossou.com",
+      "features": []
     }
   ]
 }
