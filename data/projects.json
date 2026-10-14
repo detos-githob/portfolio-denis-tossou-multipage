@@ -135,7 +135,7 @@
       "title": "Refonte de l'intranet de la CDC Bénin",
       "category": "developpement",
       "badge": "CONFIDENTIEL",
-      "summary": "CDC Hub, le Digital Workplace de la CDC Bénin\n\nPendant mon stage à la Caisse des Dépôts et Consignations du Bénin, j'ai refondu l'intranet institutionnel en un véritable espace de travail numérique sur SharePoint Online. Le portail rassemble au même endroit les actualités, les notes de service, l'annuaire et l'organigramme, les applications métiers par Direction, la médiathèque, les sondages internes, la messagerie instantanée et une recherche unifiée. Il est construit comme une suite de WebParts sur mesure, avec un design system propre à la CDCB et un mode sombre.\n\nStack : SharePoint Online · SPFx · React · TypeScript · PnPjs · Fluent UI\n\nTags : Intranet · Digital Workplace · Microsoft 365 · UX/UI",
+      "summary": "CDC Hub, le Digital Workplace de la CDC Bénin\n\nPendant mon stage à la Caisse des Dépôts et Consignations du Bénin, j'ai refondu l'intranet institutionnel en un véritable espace de travail numérique sur SharePoint Online. Le portail rassemble au même endroit les actualités, les notes de service, l'annuaire et l'organigramme, les applications métiers par Direction, la médiathèque, les sondages internes, la messagerie instantanée et une recherche unifiée. Il est construit comme une suite de WebParts sur mesure, avec un design system propre à la CDCB et un mode sombre.\n\nStack : SharePoint Online · SPFx · React · TypeScript · PnPjs · Fluent UI\n",
       "image": "/assets/img/uploads/intranet.png"
     }
   ]
