@@ -119,14 +119,15 @@
       "category": "developpement"
     },
     {
+      "badge": "AKWEO",
+      "summary": "Akweo, la gestion commerciale des commerces béninois\n\nAkweo est un SaaS que j'ai conçu et développé de A à Z pour les quincailleries, les dépôts de boissons et les alimentations générales. Il réunit les ventes, le stock, les factures, les clients et une tontine digitale dans une seule application. Akweo fonctionne aussi hors connexion : tout se synchronise automatiquement au retour du réseau. L'application s'installe sur PC, tablette et smartphone, et les abonnements se paient par Mobile Money.\n\nStack : React · TypeScript · Tailwind · Supabase · PWA\n\nTags : SaaS · Offline-first · UX/UI · Mobile Money",
       "status": "encours",
       "imageStyle": "cover",
       "title": "AKWEO",
-      "category": "developpement",
+      "link": "https://quincallerie.denistossou.com",
       "image": "https://quincallerie.denistossou.com",
-      "summary": "Akweo, la gestion commerciale des commerces béninois\n\nAkweo est un SaaS que j'ai conçu et développé de A à Z pour les quincailleries, les dépôts de boissons et les alimentations générales. Il réunit les ventes, le stock, les factures, les clients et une tontine digitale dans une seule application. Akweo fonctionne aussi hors connexion : tout se synchronise automatiquement au retour du réseau. L'application s'installe sur PC, tablette et smartphone, et les abonnements se paient par Mobile Money.\n\nStack : React · TypeScript · Tailwind · Supabase · PWA\n\nTags : SaaS · Offline-first · UX/UI · Mobile Money",
       "features": [],
-      "link": "https://quincallerie.denistossou.com"
+      "category": "developpement"
     }
   ]
 }
