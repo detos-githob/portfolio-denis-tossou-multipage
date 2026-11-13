@@ -29,7 +29,7 @@ body{
   margin:0;font-family:var(--ff);color:var(--ink);background:var(--bg);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-img{max-width:100%;display:block;}
+img{max-width:100%;height:auto;display:block;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--ff);cursor:pointer;}
 ul{margin:0;padding:0;list-style:none;}
@@ -176,6 +176,8 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{width:100%;}
 }
 .hero-copy .eyebrow{margin-bottom:22px;}
 .hero-copy h1{font-size:clamp(30px,4.6vw,46px);margin-bottom:18px;}
+.hero-copy h1 .eyebrow{display:flex;width:fit-content;line-height:normal;}
+.hero-copy h1 .h1-main{display:block;}
 .hero-copy h1 .wave{display:inline-block;animation:wave 2.4s ease-in-out infinite;transform-origin:70% 70%;}
 @keyframes wave{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}30%{transform:rotate(-8deg)}45%{transform:rotate(16deg)}60%{transform:rotate(0)}}
 .role-box{
@@ -488,7 +490,7 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{width:100%;}
   border-radius:var(--radius-pill);background:var(--bg-soft);color:var(--ink-soft);
 }
 .tag.tag-orange{background:#fde3c8;color:var(--orange-dark);}
-.p-card h4{font-size:19px;font-weight:800;line-height:1.4;margin-bottom:10px;}
+.p-card h4,.p-card-title{font-size:19px;font-weight:800;line-height:1.4;margin-bottom:10px;}
 .p-card .summary{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px;}
 .p-card .placeholder-note{
   font-size:12.5px;font-style:italic;color:var(--orange-dark);background:#fef3e7;border:1px dashed #f4c483;
@@ -593,7 +595,7 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{width:100%;}
 .contact{padding:20px 0 90px;}
 .contact-card{background:var(--white);border-radius:var(--radius-lg);position:relative;overflow:hidden;box-shadow:var(--shadow-card);min-height:600px;}
 .contact-heading{position:absolute;top:44px;left:48px;right:48px;z-index:3;pointer-events:none;}
-.contact-heading h2{font-size:clamp(26px,4.6vw,46px);font-weight:800;color:transparent;-webkit-text-stroke:1.6px #ef5a2a;letter-spacing:.01em;line-height:1.15;}
+.contact-heading h1,.contact-heading h2{font-size:clamp(26px,4.6vw,46px);font-weight:800;color:transparent;-webkit-text-stroke:1.6px #ef5a2a;letter-spacing:.01em;line-height:1.15;}
 .contact-body{display:grid;grid-template-columns:1.05fr 0.95fr;height:100%;position:relative;}
 .contact-form{padding:190px 48px 40px;position:relative;z-index:2;}
 .contact-lead{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:26px;max-width:420px;}
@@ -716,7 +718,7 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{width:100%;}
 .blog-card:hover .thumb img{transform:scale(1.06);}
 .blog-card .body{padding:24px 24px 26px;}
 .blog-date{display:block;font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--orange-dark);margin-bottom:10px;}
-.blog-card h4{font-size:18px;font-weight:800;line-height:1.4;margin-bottom:10px;}
+.blog-card h4,.blog-card-title{font-size:18px;font-weight:800;line-height:1.4;margin-bottom:10px;}
 .blog-card .summary{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .blog-readmore{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ink);}
 .blog-readmore svg{transition:transform .3s ease;}
@@ -759,3 +761,7 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{width:100%;}
   .header-cta .btn .btn-label{display:none;}
   .header-cta .btn .btn-arrow::before{display:none;}
 }
+
+/* Articles : section « À lire aussi » */
+.related-posts{padding:10px 0 90px;}
+.related-posts .section-head{margin-bottom:30px;}

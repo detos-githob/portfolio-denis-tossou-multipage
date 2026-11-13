@@ -189,13 +189,28 @@ if (skillPills.length) {
   skillPills.forEach(p=>pillIO.observe(p));
 }
 
-/* ========================= PROJETS — chargement depuis data/projects.json ========================= */
+/* ========================= PROJETS — data/projects.json =========================
+   Les cartes sont déjà écrites dans projets.html par scripts/build.mjs (lisibles par Google).
+   Le JavaScript ne les redessine que si le fichier de données a changé depuis le dernier build. */
 const portfolioGrid = document.getElementById('portfolioGrid');
 const filterBtns = document.querySelectorAll('#filterTabs .btn-plain');
 
 function escapeHTML(str){
   return String(str == null ? '' : str)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* Même logique que slugify() dans scripts/build.mjs — les deux doivent rester identiques. */
+function slugify(s){
+  return String(s == null ? '' : s).trim()
+    .replace(/^\/+|\/+$/g,'').replace(/^blog\//i,'')
+    .normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+
+function sitePath(p){
+  p = String(p || '');
+  return /^https?:\/\//.test(p) ? p : '/' + p.replace(/^\/+/,'');
 }
 
 const categoryLabels = { developpement: 'Développement', design: 'Design', marketing: 'Marketing digital' };
@@ -218,13 +233,13 @@ function projectCardHTML(p, i){
   return `
     <div class="p-card reveal ${delayClass}" data-category="${escapeHTML(p.category)}">
       <div class="${thumbClass}">
-        <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.title)}">
+        <img src="${escapeHTML(sitePath(p.image))}" alt="${escapeHTML(p.title)}" loading="lazy" decoding="async">
         <span class="status-badge ${statusClass}">${statusLabel}</span>
         ${p.badge ? `<span class="thumb-badge">${escapeHTML(p.badge)}</span>` : ''}
       </div>
       <div class="body">
         <div class="tag-row"><span class="tag tag-orange">${escapeHTML(catLabel)}</span></div>
-        <h4>${escapeHTML(p.title)}</h4>
+        <h2 class="p-card-title">${escapeHTML(p.title)}</h2>
         <p class="summary">${escapeHTML(p.summary)}</p>
         ${featuresHTML}
         ${ctaHTML}
@@ -236,16 +251,23 @@ async function loadProjects(){
   if (!portfolioGrid) return;
   const source = portfolioGrid.dataset.source;
   try {
-    const res = await fetch(source);
+    const res = await fetch(source, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     // Dans le CMS, les nouveaux projets sont ajoutés en bas de la liste ;
     // on inverse donc l'ordre pour que les plus récents s'affichent en premier sur le site.
     const items = [...(data.items || [])].reverse();
+    const staticTitles = [...portfolioGrid.querySelectorAll('.p-card-title')].map(h => h.textContent);
+    const upToDate = staticTitles.length === items.length && items.every((p,i) => p.title === staticTitles[i]);
+    if (upToDate) return; // les cartes générées au build sont déjà à jour
     portfolioGrid.innerHTML = items.map((p,i)=>projectCardHTML(p,i)).join('');
     applyReveal(portfolioGrid);
+    const active = document.querySelector('#filterTabs .btn-plain.active');
+    if (active) active.click();
   } catch (err) {
-    portfolioGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les projets pour le moment.</p>';
+    if (!portfolioGrid.querySelector('.p-card')) {
+      portfolioGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les projets pour le moment.</p>';
+    }
     console.error('Erreur de chargement des projets :', err);
   }
 }
@@ -266,7 +288,10 @@ if (filterBtns.length) {
   });
 }
 
-/* ========================= BLOG — liste (blog.html) chargée depuis data/blog.json ========================= */
+/* ========================= BLOG — liste (/blog/) =========================
+   Les cartes et les pages /blog/<slug>/ sont générées par scripts/build.mjs.
+   Si un article a été publié depuis le dernier build, le JavaScript l'ajoute quand même
+   (lien de secours vers /article?slug=…). */
 const blogGrid = document.getElementById('blogGrid');
 
 function formatFRDate(dateStr){
@@ -276,16 +301,25 @@ function formatFRDate(dateStr){
   return d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
 }
 
-function blogCardHTML(a, i){
+/* Même ordre que le build : les plus récents d'abord */
+function sortArticles(items){
+  return (items || [])
+    .map((a,i) => ({ ...a, slug: slugify(a.slug || a.title), _order: i }))
+    .filter(a => a.slug && a.title)
+    .sort((a,b) => String(b.date || '').localeCompare(String(a.date || '')) || b._order - a._order);
+}
+
+function blogCardHTML(a, i, builtSlugs){
   const delayClass = ['','reveal-delay-1','reveal-delay-2'][i % 3];
+  const href = builtSlugs.includes(a.slug) ? `/blog/${a.slug}/` : `/article?slug=${encodeURIComponent(a.slug)}`;
   return `
-    <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="blog-card reveal ${delayClass}">
+    <a href="${href}" class="blog-card reveal ${delayClass}" data-slug="${escapeHTML(a.slug)}">
       <div class="thumb">
-        <img src="${escapeHTML(a.cover)}" alt="${escapeHTML(a.title)}">
+        <img src="${escapeHTML(sitePath(a.cover))}" alt="${escapeHTML(a.title)}" loading="lazy" decoding="async">
       </div>
       <div class="body">
-        <span class="blog-date">${escapeHTML(formatFRDate(a.date))}</span>
-        <h4>${escapeHTML(a.title)}</h4>
+        <time class="blog-date" datetime="${escapeHTML(a.date)}">${escapeHTML(formatFRDate(a.date))}</time>
+        <h2 class="blog-card-title">${escapeHTML(a.title)}</h2>
         <p class="summary">${escapeHTML(a.excerpt)}</p>
         <span class="blog-readmore">Lire l'article
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -297,62 +331,71 @@ function blogCardHTML(a, i){
 async function loadBlog(){
   if (!blogGrid) return;
   const source = blogGrid.dataset.source;
+  const builtSlugs = [...blogGrid.querySelectorAll('.blog-card[data-slug]')].map(c => c.dataset.slug);
   try {
-    const res = await fetch(source);
+    const res = await fetch(source, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    // Comme pour les projets, les nouveaux articles sont ajoutés en bas de
-    // la liste par le CMS ; on inverse donc l'ordre pour afficher les plus récents en premier.
-    const items = [...(data.items || [])].reverse();
+    const items = sortArticles((await res.json()).items);
+    const upToDate = items.length === builtSlugs.length && items.every((a,i) => a.slug === builtSlugs[i]);
+    if (upToDate) return; // les cartes générées au build sont déjà à jour
     if (!items.length) {
       blogGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Aucun article publié pour le moment.</p>';
       return;
     }
-    blogGrid.innerHTML = items.map((a,i)=>blogCardHTML(a,i)).join('');
+    blogGrid.innerHTML = items.map((a,i)=>blogCardHTML(a,i,builtSlugs)).join('');
     applyReveal(blogGrid);
   } catch (err) {
-    blogGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les articles pour le moment.</p>';
+    if (!builtSlugs.length) {
+      blogGrid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;">Impossible de charger les articles pour le moment.</p>';
+    }
     console.error('Erreur de chargement du blog :', err);
   }
 }
 loadBlog();
 
-/* ========================= BLOG — article individuel (article.html) ========================= */
+/* ========================= BLOG — ancienne adresse /article?slug=… =========================
+   Redirige vers la page statique /blog/<slug>/ quand elle existe (anciens liens partagés),
+   sinon affiche l'article directement (article publié depuis le dernier build). */
 const articleContent = document.getElementById('articleContent');
 
 async function loadArticle(){
   if (!articleContent) return;
   const source = articleContent.dataset.source;
-  const slug = new URLSearchParams(window.location.search).get('slug');
+  const slug = slugify(new URLSearchParams(window.location.search).get('slug'));
 
   if (!slug) {
-    articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Article introuvable. <a href="blog.html">Retour au blog</a>.</p>';
+    articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Article introuvable. <a href="/blog/">Retour au blog</a>.</p>';
     return;
   }
 
   try {
-    const res = await fetch(source);
+    const staticUrl = `/blog/${slug}/`;
+    const head = await fetch(staticUrl, { method: 'HEAD' }).catch(() => null);
+    if (head && head.ok) { window.location.replace(staticUrl); return; }
+
+    const res = await fetch(source, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const article = (data.items || []).find(a => a.slug === slug);
+    const article = sortArticles((await res.json()).items).find(a => a.slug === slug);
 
     if (!article) {
-      articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Cet article n\'existe pas ou a été retiré. <a href="blog.html">Retour au blog</a>.</p>';
+      articleContent.innerHTML = '<p style="text-align:center;color:var(--muted);padding:60px 0;">Cet article n\'existe pas ou a été retiré. <a href="/blog/">Retour au blog</a>.</p>';
       return;
     }
 
-    document.title = article.title + ' — Denis Tossou';
+    document.title = article.title + ' | Denis Tossou';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', article.excerpt || '');
 
-    const bodyHTML = (window.marked ? marked.parse(article.body || '') : `<p>${escapeHTML(article.body || '')}</p>`);
+    // Le titre est déjà affiché en <h1> : on retire le « # Titre » du début du texte
+    const md = String(article.body || '').replace(/^\s*#\s+[^\n]*\n+/, '').replace(/^#\s+/gm, '## ');
+    const bodyHTML = (window.marked ? marked.parse(md) : `<p>${escapeHTML(md)}</p>`);
 
     articleContent.innerHTML = `
       <div class="article-head reveal in">
         <span class="blog-date">${escapeHTML(formatFRDate(article.date))}</span>
         <h1>${escapeHTML(article.title)}</h1>
       </div>
-      <div class="article-cover reveal in"><img src="${escapeHTML(article.cover)}" alt="${escapeHTML(article.title)}"></div>
+      <div class="article-cover reveal in"><img src="${escapeHTML(sitePath(article.cover))}" alt="${escapeHTML(article.title)}"></div>
       <div class="article-body reveal in">${bodyHTML}</div>
     `;
     applyReveal(articleContent);
@@ -401,7 +444,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 /* ========================= FORMULAIRE DE CONTACT — /api/contact ========================= */
 const form = document.getElementById('contactForm');
 if (form) {
-  /* Pré-remplissage depuis l'URL (ex. contact.html?service=developpement&budget=starter) */
+  /* Pré-remplissage depuis l'URL (ex. /contact?service=developpement&budget=starter) */
   const params = new URLSearchParams(window.location.search);
   const serviceField = document.getElementById('f-service');
   const budgetField = document.getElementById('f-budget');

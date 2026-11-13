@@ -7,7 +7,7 @@
       "imageStyle": "cover",
       "title": "Ets MEMEB — Site vitrine",
       "link": "",
-      "image": "assets/img/proj-memeb-vitrine.webp",
+      "image": "/assets/img/proj-memeb-vitrine.webp",
       "features": [],
       "category": "developpement"
     },
@@ -18,7 +18,7 @@
       "imageStyle": "cover",
       "title": "Sites web — Edushop, Be The Best, Wopas, Best Bénin",
       "link": "https://edushop.africa",
-      "image": "assets/img/proj-sites-web.webp",
+      "image": "/assets/img/proj-sites-web.webp",
       "features": [],
       "category": "developpement"
     },
@@ -29,7 +29,7 @@
       "imageStyle": "contain",
       "title": "Ets MEMEB — Identité visuelle",
       "link": "",
-      "image": "assets/img/logo-memeb.webp",
+      "image": "/assets/img/logo-memeb.webp",
       "features": [],
       "category": "design"
     },
@@ -40,7 +40,7 @@
       "imageStyle": "contain",
       "title": "JT Service — Identité visuelle",
       "link": "",
-      "image": "assets/img/logo-jtservice.webp",
+      "image": "/assets/img/logo-jtservice.webp",
       "features": [],
       "category": "design"
     },
@@ -51,7 +51,7 @@
       "imageStyle": "contain",
       "title": "Farhane and Company Sarl — Identité visuelle",
       "link": "",
-      "image": "assets/img/logo-farhane.webp",
+      "image": "/assets/img/logo-farhane.webp",
       "features": [],
       "category": "design"
     },
@@ -62,7 +62,7 @@
       "imageStyle": "contain",
       "title": "Pro Energy and BTP Sarl — Identité visuelle",
       "link": "",
-      "image": "assets/img/logo-proenergy.webp",
+      "image": "/assets/img/logo-proenergy.webp",
       "features": [],
       "category": "design"
     },
@@ -73,7 +73,7 @@
       "imageStyle": "contain",
       "title": "Don de Dieu & Lynares Agro — Logos & chartes graphiques",
       "link": "",
-      "image": "assets/img/logo-lynares.webp",
+      "image": "/assets/img/logo-lynares.webp",
       "features": [],
       "category": "design"
     },
@@ -84,7 +84,7 @@
       "imageStyle": "cover",
       "title": "Edushop — Community management",
       "link": "",
-      "image": "assets/img/proj-edushop-community.webp",
+      "image": "/assets/img/proj-edushop-community.webp",
       "features": [
         "Stratégie de contenu et publication régulière",
         "Gestion de la page Facebook",
@@ -99,7 +99,7 @@
       "imageStyle": "cover",
       "title": "JT Service — Community management",
       "link": "",
-      "image": "assets/img/proj-jtservice-community.webp",
+      "image": "/assets/img/proj-jtservice-community.webp",
       "features": [
         "Stratégie de contenu et publication régulière",
         "Gestion de la page Facebook",
@@ -114,7 +114,7 @@
       "imageStyle": "cover",
       "title": "Site vitrine de JTS SERVICE",
       "link": "https://jts-service.denistossou.com",
-      "image": "/assets/img/uploads/jts-service-site-vitrine.png",
+      "image": "/assets/img/uploads/projet-jts-service-site-vitrine.webp",
       "features": [],
       "category": "developpement"
     },
@@ -125,7 +125,7 @@
       "imageStyle": "cover",
       "title": "AKWEO",
       "link": "https://quincallerie.denistossou.com",
-      "image": "/assets/img/uploads/akweo.png",
+      "image": "/assets/img/uploads/projet-akweo.webp",
       "features": [],
       "category": "developpement"
     },
@@ -136,7 +136,7 @@
       "category": "developpement",
       "badge": "CONFIDENTIEL",
       "summary": "CDC Hub, le Digital Workplace de la CDC Bénin\n\nPendant mon stage à la Caisse des Dépôts et Consignations du Bénin, j'ai refondu l'intranet institutionnel en un véritable espace de travail numérique sur SharePoint Online. Le portail rassemble au même endroit les actualités, les notes de service, l'annuaire et l'organigramme, les applications métiers par Direction, la médiathèque, les sondages internes, la messagerie instantanée et une recherche unifiée. Il est construit comme une suite de WebParts sur mesure, avec un design system propre à la CDCB et un mode sombre.\n\nStack : SharePoint Online · SPFx · React · TypeScript · PnPjs · Fluent UI\n",
-      "image": "/assets/img/uploads/intranet.png"
+      "image": "/assets/img/uploads/projet-intranet-cdc-benin.webp"
     }
   ]
 }

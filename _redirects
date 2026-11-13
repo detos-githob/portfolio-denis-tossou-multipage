@@ -1,0 +1,8 @@
+# Anciennes adresses en .html -> adresses propres (redirections permanentes, utiles au référencement)
+/index.html      /           301
+/a-propos.html   /a-propos   301
+/projets.html    /projets    301
+/services.html   /services   301
+/contact.html    /contact    301
+/blog.html       /blog/      301
+/blog            /blog/      301

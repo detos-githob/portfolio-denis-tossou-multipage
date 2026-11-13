@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://denistossou.com/</loc></url>
   <url><loc>https://denistossou.com/a-propos</loc></url>
-  <url><loc>https://denistossou.com/projets</loc></url>
   <url><loc>https://denistossou.com/services</loc></url>
+  <url><loc>https://denistossou.com/projets</loc></url>
+  <url><loc>https://denistossou.com/blog/</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://denistossou.com/contact</loc></url>
+  <url><loc>https://denistossou.com/blog/digitalisation-processus-administratifs/</loc><lastmod>2026-10-14</lastmod></url>
+  <url><loc>https://denistossou.com/blog/site-vitrine-boutique-en-ligne-application-web/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://denistossou.com/blog/sharepoint-microsoft-365-bureau-digital/</loc><lastmod>2026-09-30</lastmod></url>
 </urlset>

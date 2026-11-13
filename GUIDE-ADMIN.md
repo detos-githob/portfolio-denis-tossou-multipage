@@ -150,3 +150,33 @@ Envoie (`git push`) cette modification — Cloudflare republie automatiquement.
 - **Pas de prévisualisation avant publication en un clic** : Decap CMS
   affiche un aperçu dans son interface, mais la vraie mise à jour du site
   prend le temps que Cloudflare republie (généralement moins d'une minute).
+
+---
+
+## Référencement (SEO) — comment le site est construit
+
+Depuis novembre 2026, le blog et la page Projets sont **générés en HTML** à chaque mise en
+ligne, pour que Google lise tout le contenu sans exécuter de JavaScript.
+
+- **Commande de build Cloudflare** (Workers & Pages → le projet → Settings → Build →
+  *Build command*) : `node scripts/build.mjs`. Sans elle, les nouveaux articles restent
+  visibles, mais Google ne les voit pas aussi bien.
+- Chaque article a sa propre adresse : `denistossou.com/blog/<slug>/`, avec titre,
+  description, image de partage (LinkedIn, WhatsApp) et données structurées.
+- Le `sitemap.xml` est régénéré automatiquement avec tous les articles.
+- Les anciens liens `article.html?slug=…` redirigent vers la nouvelle adresse.
+
+### Bonnes pratiques à chaque article
+
+1. **Slug** : court, en minuscules, avec des tirets, sans « / » (ex. `automatiser-conges-power-automate`).
+2. **Titre pour Google** : 60 caractères maximum, avec le sujet principal.
+3. **Résumé** : 140 à 160 caractères — c'est la description affichée dans Google.
+4. **Image de couverture** : JPG, 1200 × 630 px, moins de 300 Ko, nom sans accent.
+5. **Contenu** : ne répète pas le titre au début ; utilise « Heading 2 » / « Heading 3 »
+   pour les intertitres ; ajoute un lien vers une page du site (Services, Contact, un autre article).
+
+### Avant de modifier le code en local
+
+Fais toujours `git pull` d'abord : le CMS publie directement sur GitHub, donc ta copie
+locale prend du retard à chaque publication. Travailler sur une copie en retard a déjà
+effacé deux fois des modifications (configuration de l'admin, balises SEO).
