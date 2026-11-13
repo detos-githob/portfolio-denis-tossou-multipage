@@ -1,17 +1,29 @@
-// Configuration de déploiement Cloudflare (Worker + fichiers statiques).
-// Nécessaire depuis que Wrangler refuse de deviner la configuration
-// d'un projet qui contient un dossier « functions ».
+// Configuration de déploiement Cloudflare : un Worker (src/worker.js) qui gère
+// uniquement /api/* (formulaire de contact, messages), et les fichiers du site
+// servis directement par Cloudflare.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio-denis-tossou-multipage",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": ".",
+    "binding": "ASSETS",
+    // Le Worker ne s'exécute que pour /api/* ; le reste est servi tel quel (plus rapide)
+    "run_worker_first": ["/api/*"],
     // /a-propos sert a-propos.html, /blog/ sert blog/index.html
     "html_handling": "auto-trailing-slash",
     // Les adresses inconnues affichent 404.html
     "not_found_handling": "404-page"
   },
+  // Journaux consultables dans Cloudflare (onglet Observability)
+  "observability": { "enabled": true },
   // Conserve les variables définies dans le tableau de bord Cloudflare
   "keep_vars": true
+
+  // Base D1 des messages (optionnelle) : décommente et remplace l'identifiant
+  // par celui de ta base (voir GUIDE-MESSAGES.md), puis pousse le changement.
+  // ,"d1_databases": [
+  //   { "binding": "DB", "database_name": "portfolio-messages", "database_id": "COLLE-ICI-L-ID-DE-TA-BASE" }
+  // ]
 }

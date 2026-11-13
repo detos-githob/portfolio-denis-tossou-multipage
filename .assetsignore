@@ -1,7 +1,9 @@
 # Fichiers du dépôt qui ne doivent pas être publiés sur le site
 .git
+.wrangler
 wrangler.jsonc
-functions
+src
 scripts
 node_modules
+cms-oauth-worker
 *.md
