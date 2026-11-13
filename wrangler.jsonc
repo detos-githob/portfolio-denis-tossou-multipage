@@ -1,0 +1,17 @@
+// Configuration de déploiement Cloudflare (Worker + fichiers statiques).
+// Nécessaire depuis que Wrangler refuse de deviner la configuration
+// d'un projet qui contient un dossier « functions ».
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio-denis-tossou-multipage",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    // /a-propos sert a-propos.html, /blog/ sert blog/index.html
+    "html_handling": "auto-trailing-slash",
+    // Les adresses inconnues affichent 404.html
+    "not_found_handling": "404-page"
+  },
+  // Conserve les variables définies dans le tableau de bord Cloudflare
+  "keep_vars": true
+}
